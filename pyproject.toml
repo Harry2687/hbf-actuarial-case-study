@@ -1,0 +1,11 @@
+[project]
+name = "hbf-actuarial-case-study"
+version = "0.1.0"
+requires-python = ">=3.14"
+dependencies = [
+    "altair>=6.2.1",
+    "fastexcel>=0.20.2",
+    "ipykernel>=7.3.0",
+    "openpyxl>=3.1.5",
+    "polars>=1.41.2",
+]
