@@ -163,7 +163,7 @@ The change in policy counts reconciles perfectly with the reported movements. Ho
 | **Nervous System** | $39.6M | 6,471 | 28,014 | 2.7% | $6,116.37 |
 
 *   **Musculoskeletal and Circulatory** represent **37.5%** of all claims, with very high severities ($9.7k and $12.2k per episode). These are typical senior-heavy treatments (joint replacements, cardiac procedures) concentrated in Gold covers.
-*   **Psychiatry** is the third-largest hospital cost category, representing **10.5%** of claims but having by far the highest number of bed days (**277,752** days, representing **40.4%** of all bed days in the portfolio). This reflects the high-frequency, long-duration nature of psychiatric admissions.
+*   **Psychiatry** is the third-largest hospital cost category, representing **10.5%** of claims but having by far the highest number of bed days (**277,752** days, representing **29.9%** of all bed days in the portfolio). This reflects the high-frequency, long-duration nature of psychiatric admissions.
 
 ### Extras Claim Categories (CY 2025 - 2026)
 
