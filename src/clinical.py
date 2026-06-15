@@ -21,6 +21,15 @@ def get_top_hospital_categories(data: dict) -> pl.DataFrame:
                 ),
             ]
         )
+        .with_columns(
+            [
+                pl.col("claims").round(2),
+                pl.col("episodes").cast(pl.Int64),
+                pl.col("bed_days").cast(pl.Int64),
+                pl.col("share").round(4),
+                pl.col("avg_benefit_per_episode").round(2),
+            ]
+        )
         .sort("claims", descending=True)
     )
 
@@ -44,6 +53,14 @@ def get_extras_categories(data: dict) -> pl.DataFrame:
                 ),
             ]
         )
+        .with_columns(
+            [
+                pl.col("claims").round(2),
+                pl.col("services").cast(pl.Int64),
+                pl.col("share").round(4),
+                pl.col("avg_benefit_per_service").round(2),
+            ]
+        )
         .sort("claims", descending=True)
     )
 
@@ -63,6 +80,14 @@ def get_silver_vs_gold_psychiatry(data: dict) -> dict:
                 ]
             )
             .with_columns((pl.col("claims") / pl.col("claims").sum()).alias("share"))
+            .with_columns(
+                [
+                    pl.col("claims").round(2),
+                    pl.col("episodes").cast(pl.Int64),
+                    pl.col("bed_days").cast(pl.Int64),
+                    pl.col("share").round(4),
+                ]
+            )
             .sort("claims", descending=True)
         )
 
@@ -81,4 +106,13 @@ def get_claims_seasonality(data: dict) -> pl.DataFrame:
         .group_by("Qtr")
         .agg(pl.col("TOTAL_BENEFIT").sum().alias("ext_claims"))
     )
-    return h.join(e, on="Qtr").sort("Qtr")
+    return (
+        h.join(e, on="Qtr")
+        .with_columns(
+            [
+                pl.col("hosp_claims").round(2),
+                pl.col("ext_claims").round(2),
+            ]
+        )
+        .sort("Qtr")
+    )

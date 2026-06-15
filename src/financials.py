@@ -94,6 +94,29 @@ def calculate_hospital_financials(data: dict) -> pl.DataFrame:
                 ),
             ]
         )
+        .with_columns(
+            [
+                pl.col("total_premiums").round(2),
+                pl.col("total_claims").round(2),
+                pl.col("total_re").round(2),
+                pl.col("total_margin").round(2),
+                pl.col("avg_policies").round(2),
+                pl.col("policies_start").cast(pl.Int64),
+                pl.col("policies_end").cast(pl.Int64),
+                pl.col("total_episodes").cast(pl.Int64),
+                pl.col("total_bed_days").cast(pl.Int64),
+                pl.col("gross_loss_ratio").round(4),
+                pl.col("net_loss_ratio").round(4),
+                pl.col("margin_pct").round(4),
+                pl.col("qtr_premium_per_policy").round(2),
+                pl.col("qtr_freq_per_policy").round(4),
+                pl.col("severity_per_episode").round(2),
+                pl.col("bed_days_per_episode").round(2),
+                pl.col("qtr_margin_per_policy").round(2),
+                pl.col("policy_growth_pct").round(4),
+                pl.col("qtr_re_per_policy").round(2),
+            ]
+        )
         .sort(["Hosp", "Hosp Excess"])
     )
 
@@ -169,6 +192,24 @@ def calculate_extras_financials(data: dict) -> pl.DataFrame:
                     (pl.col("policies_end") - pl.col("policies_start"))
                     / pl.col("policies_start")
                 ).alias("policy_growth_pct"),
+            ]
+        )
+        .with_columns(
+            [
+                pl.col("total_premiums").round(2),
+                pl.col("total_claims").round(2),
+                pl.col("total_margin").round(2),
+                pl.col("avg_policies").round(2),
+                pl.col("policies_start").cast(pl.Int64),
+                pl.col("policies_end").cast(pl.Int64),
+                pl.col("total_services").cast(pl.Int64),
+                pl.col("loss_ratio").round(4),
+                pl.col("margin_pct").round(4),
+                pl.col("qtr_premium_per_policy").round(2),
+                pl.col("qtr_services_per_policy").round(4),
+                pl.col("severity_per_service").round(2),
+                pl.col("qtr_margin_per_policy").round(2),
+                pl.col("policy_growth_pct").round(4),
             ]
         )
         .sort("Extras")

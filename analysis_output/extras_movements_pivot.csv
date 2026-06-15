@@ -1,4 +1,4 @@
-Extras,Extras Cancellation,Ext Move Off,Extras Sale,Ext Move On,Net_External,Net_Internal,Total_Net_Change
-Standard,-49013,-6848,27232,5017,-21781,-1831,-23612
-Premium,-9063,-3261,2834,2789,-6229,-472,-6701
-Entry,-24750,-2512,30247,4815,5497,2303,7800
+Extras,Extras Sale,Extras Cancellation,Ext Move On,Ext Move Off,Net_External,Net_Internal,Total_Net_Change
+Entry,30247,-24750,4815,-2512,5497,2303,7800
+Premium,2834,-9063,2789,-3261,-6229,-472,-6701
+Standard,27232,-49013,5017,-6848,-21781,-1831,-23612

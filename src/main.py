@@ -99,6 +99,21 @@ def main():
                 ).alias("total_margin_pct"),
             ]
         )
+        .with_columns(
+            [
+                pl.col("hosp_prem").round(2),
+                pl.col("hosp_claims").round(2),
+                pl.col("hosp_re").round(2),
+                pl.col("hosp_margin").round(2),
+                pl.col("ext_prem").round(2),
+                pl.col("ext_claims").round(2),
+                pl.col("ext_margin").round(2),
+                pl.col("total_prem").round(2),
+                pl.col("total_claims").round(2),
+                pl.col("total_margin").round(2),
+                pl.col("total_margin_pct").round(4),
+            ]
+        )
         .sort("Qtr")
     )
     hbf_total.write_csv(os.path.join(out, "hbf_total_margins.csv"))

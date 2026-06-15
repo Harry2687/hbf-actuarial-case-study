@@ -79,6 +79,19 @@ def get_hosp_movements_pivot(data: dict) -> pl.DataFrame:
                 ).alias("Total_Net_Change"),
             ]
         )
+        .select(
+            [
+                "Hosp",
+                "Hospital Sale",
+                "Hospital Cancellation",
+                "Hosp Move On",
+                "Hosp Move Off",
+                "Net_External",
+                "Net_Internal",
+                "Total_Net_Change",
+            ]
+        )
+        .sort("Hosp")
     )
 
 
@@ -103,4 +116,17 @@ def get_ext_movements_pivot(data: dict) -> pl.DataFrame:
                 ).alias("Total_Net_Change"),
             ]
         )
+        .select(
+            [
+                "Extras",
+                "Extras Sale",
+                "Extras Cancellation",
+                "Ext Move On",
+                "Ext Move Off",
+                "Net_External",
+                "Net_Internal",
+                "Total_Net_Change",
+            ]
+        )
+        .sort("Extras")
     )

@@ -1,4 +1,4 @@
-Hosp,Hosp Move Off,Hospital Cancellation,Hosp Move On,Hospital Sale,Net_External,Net_Internal,Total_Net_Change
-Silver,-1904,-4934,6322,6002,1068,4418,5486
-Bronze,-3636,-24682,5476,30921,6239,1840,8079
-Gold,-26533,-37553,20275,7447,-30106,-6258,-36364
+Hosp,Hospital Sale,Hospital Cancellation,Hosp Move On,Hosp Move Off,Net_External,Net_Internal,Total_Net_Change
+Bronze,30921,-24682,5476,-3636,6239,1840,8079
+Gold,7447,-37553,20275,-26533,-30106,-6258,-36364
+Silver,6002,-4934,6322,-1904,1068,4418,5486
