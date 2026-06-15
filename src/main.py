@@ -13,7 +13,7 @@ from src.clinical import (
     get_silver_vs_gold_psychiatry,
     get_claims_seasonality,
 )
-
+from src.visuals import generate_visualizations
 
 def main():
     # Pipeline runner that executes all steps and saves outputs to 'analysis_output/' directory.
@@ -117,6 +117,9 @@ def main():
         .sort("Qtr")
     )
     hbf_total.write_csv(os.path.join(out, "hbf_total_margins.csv"))
+
+    # Generate visualisations for the presentation
+    generate_visualizations()
 
     print("\n--- Pipeline Outputs Saved to 'analysis_output/' directory ---")
     print(
