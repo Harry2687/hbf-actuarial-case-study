@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+
+/* HBF Brand Palette
+   Primary: #01395A (Deep Blue)
+   Secondary: #91D3D0 (Sage Teal)
+   Secondary: #90E3E9 (Electric Blue)
+*/
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #01395A !important;
+}
+
+.reveal {
+  font-family: 'Inter', sans-serif;
+  color: #ffffff;
+}
+
+.reveal .slides {
+  text-align: left;
+}
+
+.reveal .slides section.title-slide {
+  text-align: center;
+}
+
+/* Typography Overrides */
+.reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+  font-family: 'Inter', sans-serif;
+  text-transform: none;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0 0 20px 0;
+}
+
+.reveal h1 { 
+  font-size: 2.5em; 
+  color: #ffffff; 
+}
+
+.reveal h2 { 
+  color: #91D3D0; /* Sage Teal */
+  border-bottom: 2px solid #90E3E9; 
+  padding-bottom: 10px; 
+  display: inline-block; 
+  margin-bottom: 30px;
+}
+
+.reveal h3 {
+  font-size: 1.5em;
+  color: #90E3E9;
+}
+
+.reveal p {
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+/* Links */
+.reveal a { color: #90E3E9; }
+.reveal a:hover { color: #ffffff; text-shadow: 0 0 10px rgba(144, 227, 233, 0.5); }
+
+/* Custom Elements */
+.logo {
+  display: block;
+  margin: 0 auto 2rem auto !important;
+  max-width: 250px;
+  background: #ffffff; 
+  padding: 15px 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+}
+
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.column {
+  flex: 1;
+  background: rgba(255,255,255,0.05);
+  padding: 30px;
+  border-radius: 16px;
+  border: 1px solid rgba(144, 227, 233, 0.15);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s ease;
+}
+
+.column:hover {
+  transform: translateY(-8px);
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(144, 227, 233, 0.4);
+}
+
+/* Tables */
+.reveal table {
+  margin: auto;
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  font-size: 0.8em;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.reveal table th {
+  background-color: rgba(144, 227, 233, 0.15);
+  color: #90E3E9;
+  font-weight: 600;
+  padding: 15px 20px;
+}
+
+.reveal table td {
+  padding: 15px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.reveal table tr:last-child td {
+  border-bottom: none;
+}
+
+/* Lists */
+.reveal ul, .reveal ol {
+  line-height: 1.6;
+}
+
+.reveal li {
+  margin-bottom: 12px;
+}
+
+/* Animations Overrides */
+.reveal .slides section {
+  transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Progress bar customization */
+.reveal .progress {
+  color: #90E3E9;
+}
+.reveal .progress span {
+  background-color: #90E3E9;
+}
+
+/* Controls customization */
+.reveal .controls {
+  color: #91D3D0;
+}
