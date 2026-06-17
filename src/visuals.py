@@ -199,6 +199,29 @@ def generate_visualizations(out_dir="analysis_output", public_dir="presentation/
     
     chart7.save(os.path.join(public_dir, "extras_attrition.html"))
 
+    # --- Chart 8: Silver 0 Hit & Drop Churn (Slide 9) ---
+    s0_churn = pl.read_csv(os.path.join(out_dir, "silver_0_movements.csv"))
+    s0_churn = s0_churn.with_columns(
+        pl.col("Type").replace({
+            "Hospital Sale": "New Sales",
+            "Hosp Move On": "Upgrades In",
+            "Hosp Move Off": "Downgrades Out",
+            "Hospital Cancellation": "Full Cancellations"
+        })
+    )
+    chart8 = alt.Chart(s0_churn).mark_bar().encode(
+        x=alt.X('Type:N', title=None, axis=alt.Axis(labelAngle=-45), sort=['New Sales', 'Upgrades In', 'Downgrades Out', 'Full Cancellations']),
+        y=alt.Y('Movements:Q', title="Total Policies Moved (2-Year)"),
+        color=alt.condition(
+            alt.datum.Movements > 0,
+            alt.value("#91D3D0"),
+            alt.value("#ff6b6b")
+        ),
+        tooltip=[alt.Tooltip('Type:N'), alt.Tooltip('Movements:Q')]
+    ).properties(title=alt.TitleParams("Silver 0 'Hit & Drop' Movements", anchor="start"), **props).interactive()
+    
+    chart8.save(os.path.join(public_dir, "silver_0_churn.html"))
+
     print("Dynamic Visualizations successfully generated into presentation/public/")
 
     for f in os.listdir(public_dir):

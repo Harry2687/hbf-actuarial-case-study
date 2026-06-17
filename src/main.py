@@ -32,10 +32,16 @@ def main():
         f"Reconciled | Hospital: {recon['hosp_reconciles']} | Extras: {recon['ext_reconciles']}"
     )
 
-    hosp_mov = get_hosp_movements_pivot(data)
-    ext_mov = get_ext_movements_pivot(data)
-    hosp_mov.write_csv(os.path.join(out, "hospital_movements_pivot.csv"))
-    ext_mov.write_csv(os.path.join(out, "extras_movements_pivot.csv"))
+    hosp_mov_pivot = get_hosp_movements_pivot(data)
+    ext_mov_pivot = get_ext_movements_pivot(data)
+    hosp_mov_pivot.write_csv(os.path.join(out, "hospital_movements_pivot.csv"))
+    ext_mov_pivot.write_csv(os.path.join(out, "extras_movements_pivot.csv"))
+
+    # Extract Silver 0 specific movements for Hit & Drop chart
+    silver0_mov = data["movements_hosp"].filter(
+        (pl.col("Hosp") == "Silver") & (pl.col("Hosp Excess") == 0.0)
+    ).group_by("Type").agg(pl.col("Movements").sum())
+    silver0_mov.write_csv(os.path.join(out, "silver_0_movements.csv"))
 
     get_top_hospital_categories(data).write_csv(
         os.path.join(out, "top_hospital_claim_categories.csv")
