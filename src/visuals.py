@@ -126,7 +126,7 @@ def generate_visualizations(out_dir="analysis_output", public_dir="presentation/
     prof_df = pl.concat([hosp_prof.select(["Product", "MarginPerPolicy"]), ext_prof.select(["Product", "MarginPerPolicy"])])
     
     chart4 = alt.Chart(prof_df).mark_bar().encode(
-        x=alt.X('MarginPerPolicy:Q', title="Net Margin per Policy ($)", axis=alt.Axis(format='$,.0f')),
+        x=alt.X('MarginPerPolicy:Q', title="Total 2-Year Net Margin per Policy ($)", axis=alt.Axis(format='$,.0f')),
         y=alt.Y('Product:N', sort='-x', title=None),
         color=alt.condition(alt.datum.MarginPerPolicy > 0, alt.value("#91D3D0"), alt.value("#ff6b6b")),
         tooltip=[alt.Tooltip('Product'), alt.Tooltip('MarginPerPolicy', format='$,.2f', title="Margin/Policy")]
