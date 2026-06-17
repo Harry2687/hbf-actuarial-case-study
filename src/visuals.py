@@ -100,13 +100,20 @@ def generate_visualizations(out_dir="analysis_output", public_dir="presentation/
     
     # --- Chart 3: Silver 0 Psychiatry Anomaly (Slide 5) ---
     silver_mix = pl.read_csv(os.path.join(out_dir, "silver_0_claim_mix.csv")).head(5)
+    silver_mix = silver_mix.with_columns(
+        pl.col("CLAIM_CATEGORY")
+        .str.replace("Musculoskeletal system and connective tissue", "Musculoskeletal system|& connective tissue")
+        .str.replace("Endocrine, Nutritional and Metabolic diseases", "Endocrine, Nutritional|& Metabolic diseases")
+    )
     
-    chart3 = alt.Chart(silver_mix).mark_arc(innerRadius=60, stroke="#01395A", strokeWidth=2).encode(
-        theta=alt.Theta(field="claims", type="quantitative"),
-        color=alt.Color(field="CLAIM_CATEGORY", type="nominal", 
-                        sort=alt.EncodingSortField(field="claims", order="descending"),
-                        scale=alt.Scale(range=["#ff6b6b", "#90E3E9", "#91D3D0", "#fbc531", "#ffffff"]),
-                        legend=alt.Legend(title=None, orient="bottom", labelLimit=300)),
+    chart3 = alt.Chart(silver_mix).mark_bar().encode(
+        x=alt.X('claims:Q', title="Total Benefits Paid ($)", axis=alt.Axis(format='$,.0f')),
+        y=alt.Y('CLAIM_CATEGORY:N', sort='-x', title=None, axis=alt.Axis(labelExpr="split(datum.value, '|')")),
+        color=alt.condition(
+            alt.datum.CLAIM_CATEGORY == 'Psychiatry', 
+            alt.value('#ff6b6b'), 
+            alt.value('#91D3D0')
+        ),
         tooltip=[alt.Tooltip('CLAIM_CATEGORY', title='Category'), 
                  alt.Tooltip('claims', title='Benefits ($)', format='$,.0f'),
                  alt.Tooltip('share', title='Share', format='.1%')]
@@ -143,7 +150,7 @@ def generate_visualizations(out_dir="analysis_output", public_dir="presentation/
     chart5 = alt.Chart(re_impact).transform_fold(
         ['Pre_RE', 'Post_RE'], as_=['Metric', 'Margin']
     ).mark_bar().encode(
-        x=alt.X('Tier:N', title=None, axis=alt.Axis(labelAngle=0)),
+        x=alt.X('Tier:N', title=None, axis=alt.Axis(labelAngle=0), sort=["Bronze", "Silver", "Gold"]),
         y=alt.Y('Margin:Q', axis=alt.Axis(format='$,.0f'), title="Margin per Policy ($)"),
         color=alt.Color('Metric:N', scale=alt.Scale(domain=['Pre_RE', 'Post_RE'], range=["#fbc531", "#91D3D0"]), title="Margin Type"),
         xOffset='Metric:N',
@@ -165,12 +172,32 @@ def generate_visualizations(out_dir="analysis_output", public_dir="presentation/
     ).mark_bar().encode(
         x=alt.X('Type:N', title=None, axis=alt.Axis(labelAngle=0)),
         y=alt.Y('Members:Q', title="Net Change in Policies"),
-        column=alt.Column('Tier:N', title=None),
+        column=alt.Column('Tier:N', title=None, sort=["Bronze", "Silver", "Gold"]),
         color=alt.Color('Type:N', scale=alt.Scale(range=["#ff6b6b", "#fbc531"])),
         tooltip=[alt.Tooltip('Tier:N'), alt.Tooltip('Type:N'), alt.Tooltip('Members:Q')]
     ).properties(title="Hospital Policy Movements (2025-2026)", width=120, height=280).interactive()
     
     chart6.save(os.path.join(public_dir, "attrition.html"))
+
+    # --- Chart 7: Extras Attrition (Slide 9) ---
+    ext_mov = pl.read_csv(os.path.join(out_dir, "extras_movements_pivot.csv"))
+    ext_attrition = ext_mov.select([
+        pl.col("Extras").alias("Tier"),
+        pl.col("Net_External").alias("External"), 
+        pl.col("Net_Internal").alias("Internal")
+    ])
+    
+    chart7 = alt.Chart(ext_attrition).transform_fold(
+        ['External', 'Internal'], as_=['Type', 'Members']
+    ).mark_bar().encode(
+        x=alt.X('Type:N', title=None, axis=alt.Axis(labelAngle=0)),
+        y=alt.Y('Members:Q', title="Net Change in Policies"),
+        column=alt.Column('Tier:N', title=None, sort=["Entry", "Standard", "Premium"]),
+        color=alt.Color('Type:N', scale=alt.Scale(range=["#ff6b6b", "#fbc531"])),
+        tooltip=[alt.Tooltip('Tier:N'), alt.Tooltip('Type:N'), alt.Tooltip('Members:Q')]
+    ).properties(title="Extras Policy Movements (2025-2026)", width=120, height=280).interactive()
+    
+    chart7.save(os.path.join(public_dir, "extras_attrition.html"))
 
     print("Dynamic Visualizations successfully generated into presentation/public/")
 
