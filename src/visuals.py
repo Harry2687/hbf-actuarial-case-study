@@ -134,17 +134,21 @@ def generate_visualizations(out_dir="analysis_output", public_dir="presentation/
     
     chart4.save(os.path.join(public_dir, "profitability.html"))
 
-    # --- Chart 5: Total Risk Equalisation Transfers (Slide 6) ---
-    re_transfers = hosp.group_by("Hosp").agg(
-        pl.col("total_re").sum().alias("Total RE Transfer ($)")
+    # --- Chart 5: Pre-RE vs Post-RE Margin (Slide 6) ---
+    re_impact = hosp.group_by("Hosp").agg(
+        Pre_RE=(pl.col("total_margin").sum() - pl.col("total_re").sum()) / pl.col("avg_policies").sum(),
+        Post_RE=pl.col("total_margin").sum() / pl.col("avg_policies").sum()
     ).with_columns(Tier=pl.col("Hosp"))
     
-    chart5 = alt.Chart(re_transfers).mark_bar().encode(
+    chart5 = alt.Chart(re_impact).transform_fold(
+        ['Pre_RE', 'Post_RE'], as_=['Metric', 'Margin']
+    ).mark_bar().encode(
         x=alt.X('Tier:N', title=None, axis=alt.Axis(labelAngle=0)),
-        y=alt.Y('Total RE Transfer ($):Q', axis=alt.Axis(format='$,.0f'), title="Net RE Transfer ($)"),
-        color=alt.condition(alt.datum['Total RE Transfer ($)'] > 0, alt.value("#91D3D0"), alt.value("#ff6b6b")),
-        tooltip=[alt.Tooltip('Tier:N'), alt.Tooltip('Total RE Transfer ($):Q', format='$,.0f')]
-    ).properties(title="Total Risk Equalisation Transfers", **props).interactive()
+        y=alt.Y('Margin:Q', axis=alt.Axis(format='$,.0f'), title="Margin per Policy ($)"),
+        color=alt.Color('Metric:N', scale=alt.Scale(domain=['Pre_RE', 'Post_RE'], range=["#fbc531", "#91D3D0"]), title="Margin Type"),
+        xOffset='Metric:N',
+        tooltip=[alt.Tooltip('Tier:N'), alt.Tooltip('Metric:N'), alt.Tooltip('Margin:Q', format='$,.2f')]
+    ).properties(title="Pre-RE vs Post-RE Margin per Policy", **props).interactive()
 
     chart5.save(os.path.join(public_dir, "re_reversal.html"))
 
