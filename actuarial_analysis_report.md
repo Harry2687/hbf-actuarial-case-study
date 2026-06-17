@@ -23,7 +23,7 @@ All pipeline outputs are automatically saved to `analysis_output/` when you run 
 
 HBF’s portfolio is highly profitable overall, generating a total net margin of **$252.0M** over the two-year period (Hospital: **$174.8M**, Extras: **$77.2M**). However, a deep dive into product-level trends reveals a critical structural threat: **the profitable segments are shrinking rapidly, while the loss-making segments are growing.**
 
-*   **Hospital Squeeze:** HBF’s Hospital margins are entirely supported by **Gold cover** ($194.8M net margin over 2 years), which cross-subsidizes net losses in **Bronze** (-$2.7M) and **Silver** (-$17.4M) covers. Yet, Gold policies are shrinking by **~20%**, while Bronze and Silver are growing by **12% to 38%**.
+*   **Hospital Squeeze:** HBF’s Hospital margins are entirely supported by **Gold cover** ($194.8M net margin over 2 years), which cross-subsidizes net losses in **Bronze** (-$2.7M) and **Silver** (-$17.4M) covers. Yet, Gold policies are shrinking by **19.1%**, while Bronze and Silver are growing by **10.1% to 30.6%**.
 *   **Extras Squeeze:** Extras margins are driven by **Standard** ($44.5M) and **Premium** ($26.4M) covers. Premium and Standard are shrinking by **10% to 13%**, while the lower-margin **Entry** cover is growing by **9.5%**.
 *   **Risk Equalisation (RE) Reversal:** stand-alone loss ratios are misleading. Stand-alone Bronze is highly profitable (gross loss ratio of ~50-55%), but after paying into the RE pool, it becomes a loss-maker. Conversely, Gold is highly unprofitable on a gross basis (~100-130% loss ratio) but becomes highly profitable after receiving RE receipts (~80-82% net loss ratio).
 *   **Clinical Anomaly (Psychiatry in Silver 0):** Silver 0 is extremely unprofitable, with a net loss ratio of **169.5%** and a margin of **-$527.21** per policy per quarter. This is driven by **Psychiatry claims**, which represent **51.5%** of all Silver 0 benefits paid.
@@ -44,12 +44,12 @@ graph TD
     EntryE[Entry Extras <br>+8.4% Margin / $6.2M]:::profitable
 
     %% Trends
-    Gold -->|Shrinking -23.3%| Squeeze[Portfolio Profitability Squeeze]
+    Gold -->|Shrinking -19.1%| Squeeze[Portfolio Profitability Squeeze]
     PremiumE -->|Shrinking -13.4%| Squeeze
     StandardE -->|Shrinking -10.2%| Squeeze
 
-    Silver -->|Growing +38.1%| Squeeze
-    Bronze -->|Growing +12.4%| Squeeze
+    Silver -->|Growing +30.6%| Squeeze
+    Bronze -->|Growing +10.1%| Squeeze
     EntryE -->|Growing +9.5%| Squeeze
 ```
 
@@ -123,23 +123,23 @@ The change in policy counts reconciles perfectly with the reported movements. Ho
 
 | Product Tier | New Sales | Cancellations | Net External | Switched On | Switched Off | Net Internal | Total Net Change |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Bronze** | +30,921 | -24,682 | **+6,239** | +5,476 | -3,636 | **+1,840** | **+8,079** |
-| **Silver** | +6,002 | -4,934 | **+1,068** | +6,322 | -1,904 | **+4,418** | **+5,486** |
-| **Gold** | +7,447 | -37,553 | **-30,106** | +20,275 | -26,533 | **-6,258** | **-36,364** |
-| **Total** | **+44,370** | **-67,169** | **-22,799** | **+32,073** | **-32,073** | **$0** | **-22,799** |
+| **Bronze** | +26,975 | -21,823 | **+5,152** | +4,673 | -3,205 | **+1,468** | **+6,620** |
+| **Silver** | +5,307 | -4,454 | **+853** | +5,225 | -1,667 | **+3,558** | **+4,411** |
+| **Gold** | +6,552 | -31,365 | **-24,813** | +19,580 | -24,606 | **-5,026** | **-29,839** |
+| **Total** | **+38,834** | **-57,642** | **-18,808** | **+29,478** | **-29,478** | **$0** | **-18,808** |
 
 ### Extras Product Net Movements (CY 2025 - 2026)
 
 | Product Tier | New Sales | Cancellations | Net External | Switched On | Switched Off | Net Internal | Total Net Change |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Entry** | +30,247 | -24,750 | **+5,497** | +4,815 | -2,512 | **+2,303** | **+7,800** |
-| **Standard** | +27,232 | -49,013 | **-21,781** | +5,017 | -6,848 | **-1,831** | **-23,612** |
-| **Premium** | +2,834 | -9,063 | **-6,229** | +2,789 | -3,261 | **-472** | **-6,701** |
-| **Total** | **+60,313** | **-82,826** | **-22,513** | **+12,621** | **-12,621** | **$0** | **-22,513** |
+| **Entry** | +26,779 | -21,929 | **+4,850** | +4,122 | -2,164 | **+1,958** | **+6,808** |
+| **Standard** | +23,652 | -41,699 | **-18,047** | +4,277 | -5,817 | **-1,540** | **-19,587** |
+| **Premium** | +2,483 | -7,736 | **-5,253** | +2,559 | -2,977 | **-418** | **-5,671** |
+| **Total** | **+52,914** | **-71,364** | **-18,450** | **+10,958** | **-10,958** | **$0** | **-18,450** |
 
 ### Key Migration Findings:
-1.  **Retention, Not Just Downgrading:** The loss of 36,364 Gold policies is **82.8%** driven by **external cancellations (-30,106)** rather than internal downgrades to Silver/Bronze (-6,258). Similarly, Standard Extras lost 21,781 members externally. This indicates that members are leaving HBF completely (due to price or competitive offers) rather than shifting to cheaper HBF tiers.
-2.  **Internal downgrades are material:** Net internal transfers still show a shift of **-6,258** from Gold and positive flows into Silver (**+4,418**) and Bronze (**+1,840**), accelerating the loss of high-margin members.
+1.  **Retention, Not Just Downgrading:** The loss of 29,839 Gold policies is **83.2%** driven by **external cancellations (-24,813)** rather than internal downgrades to Silver/Bronze (-5,026). Similarly, Standard Extras lost 18,047 members externally. This indicates that members are leaving HBF completely (due to price or competitive offers) rather than shifting to cheaper HBF tiers.
+2.  **Internal downgrades are material:** Net internal transfers still show a shift of **-5,026** from Gold and positive flows into Silver (**+3,558**) and Bronze (**+1,468**), accelerating the loss of high-margin members.
 3.  **Data Quality Observation:** In 2026Q4, Gold 250 recorded a massive spike in internal movements: **-16,538 Move Off** and **+16,228 Move On**, with a net change of only **-310**. This extreme gross volume (representing ~25% of the product base) is highly characteristic of an administrative database migration (e.g. merging product codes or fixing system records) rather than independent customer behavior.
 
 ---
@@ -185,7 +185,7 @@ The change in policy counts reconciles perfectly with the reported movements. Ho
 Based on these actuarial findings, HBF should consider several strategic interventions to stabilize margins and address customer attrition:
 
 1.  **Gold Product Retention Campaign:**
-    Since Gold is HBF's primary margin generator, the fund must address the **-30,106 external cancellations**.
+    Since Gold is HBF's primary margin generator, the fund must address the **-24,813 external cancellations**.
     *   *Action:* Conduct customer experience and exit surveys to understand why Gold members are cancelling. Introduce loyalty benefits, premium service features, or age-based premium discounts to retain older cohorts.
 2.  **Reprice Bronze and Silver Products:**
     Bronze and Silver covers currently run net losses (-6.0% and -11.9% for the $250 excess tiers) because underwriting profits are wiped out by payments into the Risk Equalisation pool.

@@ -60,6 +60,7 @@ def get_hosp_movements_pivot(data: dict) -> pl.DataFrame:
     # Returns a pivoted summary of hospital policy movements by tier.
     return (
         data["movements_hosp"]
+        .filter(pl.col("Qtr") != "2025Q1")
         .group_by(["Hosp", "Type"])
         .agg(pl.col("Movements").sum().alias("Total_Movements"))
         .pivot(on="Type", index="Hosp", values="Total_Movements")
@@ -99,6 +100,7 @@ def get_ext_movements_pivot(data: dict) -> pl.DataFrame:
     # Returns a pivoted summary of extras policy movements by tier.
     return (
         data["movements_ext"]
+        .filter(pl.col("Qtr") != "2025Q1")
         .group_by(["Extras", "Type"])
         .agg(pl.col("Movements").sum().alias("Total_Movements"))
         .pivot(on="Type", index="Extras", values="Total_Movements")
